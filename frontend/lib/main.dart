@@ -8,7 +8,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Sokomo';
+  static const String _title = 'Sokomob';
 
   @override
   Widget build(BuildContext context) {
@@ -21,5 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
