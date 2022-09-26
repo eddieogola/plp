@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:plp/screens/home.dart';
-import 'package:plp/screens/map.dart';
-import 'package:plp/screens/shop.dart';
+import 'package:plp/ui/screens/home.dart';
+import 'package:plp/ui/screens/map.dart';
+import 'package:plp/ui/screens/shop.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
   @override
   State<StartScreen> createState() => _StartScreenState();
 }

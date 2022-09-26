@@ -7,7 +7,7 @@ from rest_framework import status, generics
 class ProductList(APIView):
 
     def is_valid_request_param(self, request): 
-        allowed_query_params = ['id']
+        allowed_query_params = ['id','format']
         
         query_param = list(self.request.query_params.keys())
         
