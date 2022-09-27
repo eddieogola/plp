@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from products_api.models import Product 
 from products_api.serializers import ProductSerializer
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status
 
 class ProductList(APIView):
 
@@ -22,6 +22,7 @@ class ProductList(APIView):
 
             #Filter params
             product_id = self.request.query_params.get('id', None)
+
             products = Product.objects.all()
 
             if product_id:
@@ -30,9 +31,6 @@ class ProductList(APIView):
 
                     if products.count() == 0:
                         return Response({'error': 'No product found',}, status=status.HTTP_404_NOT_FOUND)
-                        
-                    serializer = ProductSerializer(products, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
 
                 except:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -84,6 +82,8 @@ class ProductList(APIView):
                 return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 

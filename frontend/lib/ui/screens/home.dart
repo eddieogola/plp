@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
               replacement: const Center(
                 child: CircularProgressIndicator(),
               ),
-              child: products?[index].name != null ? Text(products![index].name) : Center(child: Text('Nothin to show'),
+              child: products?[index].name != null ? Text(products![index].name) : const Center(child: Text('Nothin to show'),
             ));
           }),
     );
