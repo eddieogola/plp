@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:plp/data/remote/seller_service.dart';
+import 'package:plp/data/services/seller_service.dart';
 import 'package:plp/ui/screens/home.dart';
 import 'package:plp/ui/screens/map.dart';
 import 'package:plp/ui/screens/shop.dart';

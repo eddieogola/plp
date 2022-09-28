@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plp/data/remote/seller_service.dart';
+import 'package:plp/data/services/seller_service.dart';
 import 'package:plp/ui/components/map/city_card.dart';
 import 'package:plp/ui/components/map/map_utils.dart';
 
@@ -12,6 +12,7 @@ class CityList extends StatefulWidget {
 
 class _CityListState extends State<CityList> {
   List<String>? cities;
+  List<Widget> cityCards = [];
   var isLoaded = false;
 
   @override
@@ -23,19 +24,16 @@ class _CityListState extends State<CityList> {
   getData() async {
     cities = await SellerService.getCities();
     if (cities != null) {
-    for ( var city in cities!){
-      cityCards.add(
-        CityCard(city: city, color: getColor())
-      );
-    }
-
+    
       setState(() {
         isLoaded = true;
+        for (var city in cities!) {
+        cityCards.add(CityCard(city: city, color: getColor()));
+      }
       });
     }
   }
 
-  List<Widget> cityCards = [];
 
   @override
   Widget build(BuildContext context) {
