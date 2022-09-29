@@ -55,9 +55,9 @@ class EmptyCarousel extends StatelessWidget {
 }
 
 class DataCarousel extends StatefulWidget {
-  const DataCarousel(List<Seller> this.sellerList, {super.key});
+  const DataCarousel(List<String> this.sellerList, {super.key});
 
-  final List<Seller> sellerList ;
+  final List<String> sellerList;
 
   @override
   State<DataCarousel> createState() => _DataCarouselState();
@@ -76,17 +76,17 @@ class _DataCarouselState extends State<DataCarousel> {
               borderRadius: BorderRadius.circular(10),
               child: Stack(children: [
                 CachedNetworkImage(
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1664268336138-388b6e0b9366?ixlib=rb-1.2.1&dl=ahmed-f0S62Iduanw-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb',
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                                child: CircularProgressIndicator(
-                              value: downloadProgress.progress,
-                            )),
-                            fit: BoxFit.cover,
-                            width: 1000,
-                            ),
+                  imageUrl:
+                      'https://source.unsplash.com/random?sig=1',
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                          child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  )),
+                  fit: BoxFit.cover,
+                  width: 1000,
+                ),
                 Positioned(
                     bottom: 0,
                     left: 0,
@@ -116,8 +116,8 @@ class _DataCarouselState extends State<DataCarousel> {
           options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1,
+              aspectRatio: 21 / 9,
+              viewportFraction: 0.8,
               onPageChanged: (index, reason) {
                 setState(() {
                   _currentIndex = index;
@@ -129,9 +129,9 @@ class _DataCarouselState extends State<DataCarousel> {
           children: widget.sellerList.map((e) {
             int index = widget.sellerList.indexOf(e);
             return Container(
-              width: 8,
-              height: 8,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+              width: 5,
+              height: 5,
+              margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _currentIndex == index
