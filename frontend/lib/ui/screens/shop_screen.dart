@@ -1,18 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:plp/ui/screens/product_detail_screen.dart';
+import 'package:plp/data/model/seller_model.dart';
+import 'package:plp/data/services/product_service.dart';
+import 'package:plp/ui/components/shop/shop_grid.dart';
+import 'package:plp/ui/screens/loading_screen.dart';
 
-class Shop extends StatefulWidget {
-  const Shop({Key? key}) : super(key: key);
+class ShopScreen extends StatefulWidget {
+  const ShopScreen({Key? key}) : super(key: key);
 
   @override
-  State<Shop> createState() => _ShopState();
+  State<ShopScreen> createState() => _ShopScreenState();
 }
 
-class _ShopState extends State<Shop> {
+class _ShopScreenState extends State<ShopScreen> {
+   List<Product> productList = [];
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    var products = await ProductService.getProducts();
+
+    if (products != null) {
+      setState(() {
+        products.forEach((product) {
+          productList.add(product);
+        });
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ProductDetailScreen(),
+    return  Scaffold(
+      body: productList.isEmpty ? LoadingScreen() : ShopGrid(productList),
     );
   }
 }

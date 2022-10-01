@@ -2,7 +2,7 @@ class StaticValues {
   const StaticValues._();
 
   // Connection
-  static const String apiUrl = "http://127.0.0.1:8000/";
+  static const String apiUrl = "http://192.168.2.102:8000/";
 
   //Storage
   static const String SELLER_DATA = 'sellerData';

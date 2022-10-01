@@ -2,19 +2,20 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:plp/data/model/seller_model.dart';
 
 
 class ProductCard extends StatelessWidget {
  final VoidCallback press;
   final String imageUrl;
+  final Product product;
 
   const ProductCard({
     Key? key,
     required this.imageUrl,
+    required this.product,
     required this.press,
   }) : super(key: key);
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
-                tag: "Sukuma",
+                tag: product.name,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
@@ -52,13 +53,12 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20/ 4),
             child: Text(
-              // products is out demo list
-              "Title goes",
+              product.name,
               style: TextStyle(color: Colors.red),
             ),
           ),
           Text(
-            "\$ Price goes",
+            "KShs.${product.price}",
             style: TextStyle(fontWeight: FontWeight.bold),
           )
         ],

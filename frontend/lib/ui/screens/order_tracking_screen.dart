@@ -1,15 +1,16 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:plp/common/static_values.dart';
+import 'package:plp/data/model/seller_model.dart';
+import 'package:plp/ui/screens/loading_screen.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
-  const OrderTrackingScreen({super.key});
+  const OrderTrackingScreen({required this.address, super.key});
+
+  final List<Address> address;
 
   @override
   State<OrderTrackingScreen> createState() => _OrderTrackingScreenState();
@@ -18,11 +19,11 @@ class OrderTrackingScreen extends StatefulWidget {
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng sourceLocation = LatLng(-1.286389, 36.817223);
-  static const LatLng destinationLocation = LatLng(0.282731, 34.751863);
+  late LatLng destinationLocation;
 
   List<LatLng> polylineCoordinates = [];
-  LocationData? currentLocation;
+
+  late LocationData currentLocation;
 
   void getCurrentLocation() async {
     Location location = Location();
@@ -50,7 +51,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       StaticValues.GOOGLE_MAPS_API_KEY,
-      PointLatLng(sourceLocation.latitude, destinationLocation.longitude),
+      PointLatLng(currentLocation!.latitude!, destinationLocation.longitude),
       PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
     );
 
@@ -64,6 +65,11 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
 
   @override
   void initState() {
+    setState(() {
+      destinationLocation =
+          LatLng(widget.address[0].latitude, widget.address[0].longitude);
+    });
+
     getCurrentLocation();
     getPolyPoints();
     super.initState();
@@ -72,39 +78,33 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentLocation == null
-          ? const Center(child: Text('Loading'))
-          : GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(
-                      currentLocation!.latitude!, currentLocation!.longitude!),
-                  zoom: 14.5),
-              polylines: {
-                Polyline(
-                    polylineId: PolylineId('route'),
-                    points: polylineCoordinates,
-                    color: Colors.blue,
-                    width: 6)
-              },
-              markers: {
-                Marker(
-                  markerId: const MarkerId('currentLocation'),
-                  position: LatLng(
-                      currentLocation!.latitude!, currentLocation!.longitude!),
-                ),
-                Marker(
-                  markerId: const MarkerId('source'),
-                  position: sourceLocation,
-                ),
-                Marker(
-                  markerId: const MarkerId('destination'),
-                  position: destinationLocation,
-                ),
-              },
-              onMapCreated: (mapController) {
-                _controller.complete(mapController);
-              },
-            ),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+            target:
+                LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+            zoom: 14.5),
+        polylines: {
+          Polyline(
+              polylineId: PolylineId('route'),
+              points: polylineCoordinates,
+              color: Colors.blue,
+              width: 6)
+        },
+        markers: {
+          Marker(
+            markerId: const MarkerId('currentLocation'),
+            position:
+                LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+          ),
+          Marker(
+            markerId: const MarkerId('destination'),
+            position: destinationLocation,
+          ),
+        },
+        onMapCreated: (mapController) {
+          _controller.complete(mapController);
+        },
+      ),
     );
   }
 }

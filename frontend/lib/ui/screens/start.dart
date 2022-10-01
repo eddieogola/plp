@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plp/data/services/seller_service.dart';
-import 'package:plp/ui/screens/home.dart';
-import 'package:plp/ui/screens/map.dart';
+import 'package:plp/ui/screens/home_screen.dart';
+import 'package:plp/ui/screens/map_screen.dart';
 import 'package:plp/ui/screens/shop_screen.dart';
 
 class StartScreen extends StatefulWidget {
@@ -16,9 +16,9 @@ class _StartScreenState extends State<StartScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Shop(),
-    Map(),
+    HomeScreen(),
+    ShopScreen(),
+    MapScreen(),
   ];
 
   void _onItemTapped(int index) {

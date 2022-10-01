@@ -3,8 +3,8 @@ from products_api.models import Product
 
 class Address(models.Model):
     city = models.CharField(max_length=100)
-    latitude = models.IntegerField()
-    longitude = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__(self):
         return self.city

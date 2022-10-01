@@ -1,13 +1,19 @@
 import 'dart:convert';
 
-List<Seller> sellerFromJson(String str) =>
-    List<Seller>.from(json.decode(str).map((x) => Seller.fromJson(x)));
-
 List<List<String>> cityFromJson(String str) => List<List<String>>.from(
     json.decode(str).map((x) => List<String>.from(x.map((x) => x))));
 
 String cityToJson(List<List<String>> data) => json.encode(
     List<dynamic>.from(data.map((x) => List<dynamic>.from(x.map((x) => x)))));
+
+List<Product> productFromJson(String str) =>
+    List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+
+String productToJson(List<Product> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+List<Seller> sellerFromJson(String str) =>
+    List<Seller>.from(json.decode(str).map((x) => Seller.fromJson(x)));
 
 String sellerToJson(List<Seller> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -59,13 +65,13 @@ class Address {
   });
 
   String city;
-  int latitude;
-  int longitude;
+  double latitude;
+  double longitude;
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
         city: json["city"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: json["latitude"].toDouble(),
+        longitude: json["longitude"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,22 +84,25 @@ class Address {
 class Product {
   Product({
     required this.id,
+    required this.imageUrl,
     required this.name,
     required this.summary,
-    this.description,
+    required this.description,
     required this.price,
     required this.rating,
   });
 
   int id;
+  String imageUrl;
   String name;
   String summary;
-  String? description;
+  String description;
   String price;
   int rating;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
+        imageUrl: json["imageUrl"],
         name: json["name"],
         summary: json["summary"],
         description: json["description"],
@@ -103,6 +112,7 @@ class Product {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "imageUrl": imageUrl,
         "name": name,
         "summary": summary,
         "description": description,

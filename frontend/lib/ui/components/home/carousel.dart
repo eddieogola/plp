@@ -1,28 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:plp/data/model/seller_model.dart';
+import 'package:plp/ui/screens/seller_detail_screen%20.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class EmptyCarousel extends StatelessWidget {
-  const EmptyCarousel({super.key});
+  const EmptyCarousel(this.headline, {super.key});
+  final String headline;
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      highlightColor: Colors.white,
+      highlightColor: Colors.green.shade100,
       baseColor: Colors.grey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('No content'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              headline,
+              style: TextStyle(
+                  fontSize: headlineFontSize, fontWeight: FontWeight.bold),
+            ),
+          ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Colors.grey, borderRadius: BorderRadius.circular(10)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: displayAspecRatio,
                 child: Container(
                   color: Colors.grey,
                 ),
@@ -40,11 +50,8 @@ class EmptyCarousel extends StatelessWidget {
                 width: 8,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.green,
+                  color: Colors.grey,
                 ),
-              ),
-              SizedBox(
-                width: 3,
               ),
             ],
           )
@@ -55,9 +62,13 @@ class EmptyCarousel extends StatelessWidget {
 }
 
 class DataCarousel extends StatefulWidget {
-  const DataCarousel(List<String> this.sellerList, {super.key});
-
-  final List<String> sellerList;
+  const DataCarousel({
+    required this.headline,
+    required this.sellerList,
+    super.key,
+  });
+  final List<Seller> sellerList;
+  final String headline;
 
   @override
   State<DataCarousel> createState() => _DataCarouselState();
@@ -70,53 +81,69 @@ class _DataCarouselState extends State<DataCarousel> {
   @override
   void initState() {
     imageSlider = widget.sellerList
-        .map((e) => Container(
+        .map((seller) => Container(
             margin: EdgeInsets.all(10),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Stack(children: [
-                CachedNetworkImage(
-                  imageUrl:
-                      'https://source.unsplash.com/random?sig=1',
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                          child: CircularProgressIndicator(
-                    value: downloadProgress.progress,
-                  )),
-                  fit: BoxFit.cover,
-                  width: 1000,
+                GestureDetector(
+                  onTap: (() => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SellerDetailScreen(seller)))),
+                  child: CachedNetworkImage(
+                    imageUrl: seller.product[0].imageUrl,
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                    )),
+                    fit: BoxFit.cover,
+                    width: 1000,
+                  ),
                 ),
                 Positioned(
-                    bottom: 0,
+                    bottom: 90,
                     left: 0,
                     right: 0,
                     top: 0,
                     child: Container(
-                        padding: EdgeInsets.all(10),
+                        decoration:
+                            BoxDecoration(color: Colors.black.withOpacity(0.4)),
+                        padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
                         child: Text(
-                          "Dummy text",
+                          seller.name,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold),
                         )))
               ]),
             )))
         .toList();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            widget.headline,
+            style: TextStyle(
+                fontSize: headlineFontSize, fontWeight: FontWeight.bold),
+          ),
+        ),
         CarouselSlider(
           items: imageSlider,
           options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,
-              aspectRatio: 21 / 9,
+              aspectRatio: displayAspecRatio,
               viewportFraction: 0.8,
               onPageChanged: (index, reason) {
                 setState(() {
@@ -131,7 +158,7 @@ class _DataCarouselState extends State<DataCarousel> {
             return Container(
               width: 5,
               height: 5,
-              margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+              margin: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _currentIndex == index
@@ -145,3 +172,6 @@ class _DataCarouselState extends State<DataCarousel> {
     );
   }
 }
+
+final double headlineFontSize = 20;
+final double displayAspecRatio = 21 / 9;

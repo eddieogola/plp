@@ -4,7 +4,7 @@ import 'dart:math';
 List<Color> colorList = [
   Colors.red,
   Colors.orange,
-  Colors.yellow,
+  Colors.amber,
   Colors.green,
   Colors.teal,
   Colors.blue,

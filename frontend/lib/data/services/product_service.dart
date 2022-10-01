@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:plp/common/static_values.dart';
-import 'package:plp/data/model/product_model.dart';
+import 'package:plp/data/model/seller_model.dart';
 
 class ProductService {
   const ProductService._();
