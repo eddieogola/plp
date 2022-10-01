@@ -35,4 +35,19 @@ class SellerService {
       return null;
     }
   }
+
+  static Future<List<Address>?> getAddresses(String address) async {
+    try {
+      var uri = Uri.parse("${StaticValues.apiUrl}sellers/?address=${address}");
+      var response = await client.get(uri);
+
+      if (response.statusCode == 200) {
+        var json = response.body;
+        var addresses = addressFromJson(json);
+        return addresses;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
 }

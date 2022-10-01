@@ -18,6 +18,12 @@ List<Seller> sellerFromJson(String str) =>
 String sellerToJson(List<Seller> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+List<Address> addressFromJson(String str) =>
+    List<Address>.from(json.decode(str).map((x) => Address.fromJson(x)));
+
+String addressToJson(List<Address> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Seller {
   Seller({
     required this.id,
@@ -59,22 +65,26 @@ class Seller {
 
 class Address {
   Address({
+    required this.name,
     required this.city,
     required this.latitude,
     required this.longitude,
   });
 
   String city;
+  String name;
   double latitude;
   double longitude;
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
+        name: json["name"],
         city: json["city"],
         latitude: json["latitude"].toDouble(),
         longitude: json["longitude"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
+        "name": name,
         "city": city,
         "latitude": latitude,
         "longitude": longitude,
@@ -83,7 +93,6 @@ class Address {
 
 class Product {
   Product({
-    required this.id,
     required this.imageUrl,
     required this.name,
     required this.summary,
@@ -92,7 +101,6 @@ class Product {
     required this.rating,
   });
 
-  int id;
   String imageUrl;
   String name;
   String summary;
@@ -101,7 +109,6 @@ class Product {
   int rating;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
         imageUrl: json["imageUrl"],
         name: json["name"],
         summary: json["summary"],
@@ -111,7 +118,6 @@ class Product {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "imageUrl": imageUrl,
         "name": name,
         "summary": summary,

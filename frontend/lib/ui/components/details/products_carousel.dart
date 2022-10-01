@@ -46,7 +46,7 @@ class _ProductDataCarouselState extends State<ProductDataCarousel> {
                         width: 1000,
                       ),
                       Positioned(
-                          bottom: 90,
+                          bottom: 80,
                           left: 0,
                           right: 0,
                           top: 0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plp/data/model/seller_model.dart';
 import 'package:plp/data/services/seller_service.dart';
 import 'package:plp/ui/screens/city_list_screen.dart';
 import 'package:plp/ui/screens/loading_screen.dart';
@@ -22,13 +23,18 @@ class _MapState extends State<MapScreen> {
   getData() async {
     List<String>? cities = await SellerService.getCities();
 
-    setState(() {
-      cityList = cities!;
-    });
+    if (cities != null) {
+      setState(() {
+        cityList = cities;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: cityList.isEmpty ? LoadingScreen() : CityListScreen(cityList));
+    return Scaffold(
+        body: cityList.isEmpty
+            ? LoadingScreen()
+            : CityListScreen( cityList: cityList));
   }
 }

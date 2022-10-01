@@ -64,7 +64,7 @@ class SellerDetailScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) => OrderTrackingScreen(
-                                        address: seller.address))))
+                                        addressList: seller.address))))
                           }),
                   SizedBox(
                     height:10,

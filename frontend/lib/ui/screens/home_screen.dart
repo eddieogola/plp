@@ -1,12 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:plp/data/model/seller_model.dart';
 import 'package:plp/data/services/seller_service.dart';
 import 'package:plp/ui/components/home/carousel.dart';
-import 'package:plp/ui/components/home/merchant_card.dart';
 import 'package:plp/ui/components/home/merchant_list.dart';
-import 'package:plp/ui/screens/loading_screen.dart';
-import 'package:plp/ui/screens/order_tracking_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

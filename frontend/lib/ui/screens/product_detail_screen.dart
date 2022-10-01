@@ -14,7 +14,8 @@ class ProductDetailScreen extends StatelessWidget {
       body: Stack(children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.6,
+          height: MediaQuery.of(context).size.height * 0.5,
+        
           child: Stack(children: [
             CachedNetworkImage(
               imageUrl: product.imageUrl,
@@ -26,6 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
               )),
               fit: BoxFit.cover,
               width: 1000,
+              height:MediaQuery.of(context).size.height * 0.6,
             ),
             Center(
               child: Text(product.name,

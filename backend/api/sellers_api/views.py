@@ -1,14 +1,14 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from sellers_api.models import Seller , Address
-from sellers_api.serializers import SellerSerializer
+from sellers_api.serializers import AddressSerializer, SellerSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
 class SellerList(APIView):
 
     def is_valid_request_param(self, request): 
-        allowed_query_params = ['id','format', 'city']
+        allowed_query_params = ['id','format', 'city', 'address']
         
         query_param = list(self.request.query_params.keys())
         
@@ -24,8 +24,10 @@ class SellerList(APIView):
             #Filter params
             seller_id = self.request.query_params.get('id', None)
             all_cities = self.request.query_params.get('city','')
+            city_name = self.request.query_params.get('address',None)
 
             sellers = Seller.objects.all()
+            addresses = Address.objects.all()
 
             if seller_id:
                 try:
@@ -36,10 +38,22 @@ class SellerList(APIView):
 
                 except:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            if city_name:
+                try:
+                    query_set = addresses.filter(city=city_name)
+
+                    serializer = AddressSerializer(query_set, many=True)
+                    if len(query_set) == 0:
+                        return Response({'error': 'No Address found',}, status=status.HTTP_404_NOT_FOUND)
+
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                except:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+
             
             if all_cities:
                 try:
-                    addresses = list(Address.objects.all())
                     cities = set()
                     
                     for address in addresses:
@@ -51,7 +65,7 @@ class SellerList(APIView):
                     return Response({frozenset(cities)},status=status.HTTP_200_OK)
 
                 except:
-                    return Response(cities,status=status.HTTP_400_BAD_REQUEST)
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
 
             
             serializer = SellerSerializer(sellers, many=True)
