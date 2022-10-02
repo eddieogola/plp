@@ -1,16 +1,34 @@
-# plp
+# Frontend
+## Technical Requirements:
+- [Dart](https://dart.dev/  "Dart") 
+- [Flutter Framework](https://flutter.dev/  "Flutter framework") 
 
-A new Flutter project.
+## Architecture
+Most of the apps major architectural design is in the **lib** folder
 
-## Getting Started
+The lib folder contains common, data and ui modules
 
-This project is a starting point for a Flutter application.
+### common
+Contains apiUrl which needs to be configured for the app to communicate with the backend server
 
-A few resources to get you started if this is your first Flutter project:
+### data
+Contains models which serve as Data Transfer Objects for api communication and services that have methods to call the api
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### ui
+contains all the user interface code
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Start
+
+Open the static_values.dart file located in [plp/frontend/lib/common](https://github.com/eddieogola/plp/tree/master/frontend/lib/common)
+Edit the `IP_ADDRESS:PORT_NUMBER` to match those of the [backend](https://github.com/eddieogola/plp/tree/master/backend#start-server).
+
+On the terminal navigate to plp/frontend/
+
+Execute the commands
+
+`flutter pub get`
+
+`flutter run`
+
+## The app should now be running and consuming data from the api
