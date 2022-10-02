@@ -2,7 +2,7 @@ class StaticValues {
   const StaticValues._();
 
   // Connection
-  static const String apiUrl = "http://192.168.2.106:8000/";
+  static const String apiUrl = "http://YOUR_IP_ADDRESS:PORT_NUMBER/";
 
   //Storage
   static const String SELLER_DATA = 'sellerData';
