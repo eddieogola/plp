@@ -52,9 +52,14 @@ Use your ip address to enable the frontend app to fetch data from the api when u
 I noticed that localhost doesn&#39;t work for external devices/emulators.
 
 This should be the output on the terminal: 
-[Photo]
+With 127.0.0.1 being your IP_ADDRESS
+
+![Terminal](https://user-images.githubusercontent.com/39475602/193451089-4749a71b-cf47-4e6e-99b8-24b67aae9f73.png)
 
 ## Great! The backend is now ready to start receiving REST requests.
+
+
+
 
 
 
