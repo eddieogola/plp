@@ -18,5 +18,7 @@ The server needs to be running first hence set up the [backend first](https://gi
 Once the server is running. The frontend is now ready to consume the backend API. Set up the [frontend](https://github.com/eddieogola/plp/tree/master/frontend#frontend)
 Now start the app.
 
+![Home Screen](https://lingofrica.com/plp/home.gif)
+
 
 
