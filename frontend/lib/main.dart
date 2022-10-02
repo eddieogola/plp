@@ -3,11 +3,7 @@ import 'package:plp/ui/screens/start.dart';
 
 void main() {
   
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const MyApp())
-    );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: const StartScreen(title: _title),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
