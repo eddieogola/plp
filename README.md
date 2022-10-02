@@ -15,7 +15,8 @@ Flutter was chosen due to its multi-platform capabilities and the vast out-of-th
 
 ## Start
 The server needs to be running first hence set up the [backend first](https://github.com/eddieogola/plp/tree/master/backend#backend).
-Once the server is running. The frontend is now ready to consume the backend API. Now start the app.
+Once the server is running. The frontend is now ready to consume the backend API. Set up the [frontend](https://github.com/eddieogola/plp/tree/master/frontend#frontend)
+Now start the app.
 
 
 
