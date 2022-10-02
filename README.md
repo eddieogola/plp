@@ -19,6 +19,15 @@ Once the server is running. The frontend is now ready to consume the backend API
 Now start the app.
 
 ![Home Screen](https://lingofrica.com/plp/home.gif)
+![home](https://user-images.githubusercontent.com/39475602/193453637-bd3daba2-5a51-41a1-a045-520eb10e9cf3.png)
+
+![Shop Screen](https://lingofrica.com/plp/shop.gif)
+![shop](https://user-images.githubusercontent.com/39475602/193453643-44621a6e-22f2-4618-9d29-57be4f881ba2.png)
+
+![Map Screen](https://lingofrica.com/plp/map.gif)
+![city](https://user-images.githubusercontent.com/39475602/193453651-c553d99d-1814-4f04-8c82-3f943062e1a4.png)
+![map](https://user-images.githubusercontent.com/39475602/193453653-60c55f01-6d7a-4df9-a4fa-46548502fd77.png)
+
 
 
 
