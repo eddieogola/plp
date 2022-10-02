@@ -5,7 +5,7 @@
 - [Django Rest Framework](https://www.django-rest-framework.org/  "Django Rest Framework")
 
 ## Architecture
-The backend is contains api and db
+The backend contains api and db
 
 ### db
 db contains a sqlite3 database prepopulated with some dummy data.
