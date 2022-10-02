@@ -14,7 +14,7 @@ Python was chosen due to its versatility in the Machine Learning industry this t
 Flutter was chosen due to its multi-platform capabilities and the vast out-of-the-box Widgets readily available.
 
 ## Start
-The server needs to be running first hence set up the backend first.
+The server needs to be running first hence set up the [backend first](https://github.com/eddieogola/plp/tree/master/backend#backend).
 Once the server is running. The frontend is now ready to consume the backend API. Now start the app.
 
 
